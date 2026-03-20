@@ -1,0 +1,57 @@
+package instruction;
+
+import cpu.CPU;
+import operation.Utility;
+import instruction.*;
+import java.util.Arrays;
+
+public class Instruction {
+    public static String[] process(String d) {
+        if (d.length() == 0) return new String[]{"NOP"};
+        
+        String[] inst = d.split("[\\s]+");
+        
+        for (int i=1; i<inst.length; i++) {
+
+            if (inst[i].length() >= 4) {
+                return new String[] {
+                    String.join(" ", Arrays.copyOfRange(inst, 0, i)),
+                    inst[i].substring(0, 2),
+                    inst[i].substring(2)
+                };
+            } 
+         
+            else if (inst[i].length() == 3) {
+                return new String[] {
+                    String.join(" ", Arrays.copyOfRange(inst, 0, i)),
+                    inst[i]
+                };
+            }
+        }
+
+        return new String[] {d};
+    }
+
+    public static void call(String[] inst) {
+        switch( inst[0] ) {
+            case "MOV":
+                Transfer.MOV(inst[1].charAt(0), inst[2].charAt(1));
+                break;
+            case "ADD":
+                Arithmetic.ADD(inst[1].charAt(0));
+                break;
+            case "LDA":
+                Transfer.LDA(inst[2]+inst[1]);
+                break;
+            case "STA":
+                Transfer.STA(inst[2]+inst[1]);
+                break;
+            case "MVI":
+                Transfer.MVI(inst[1].charAt(0), inst[2]);
+            case "HLT":
+                break;
+            case "NOP":
+                break;
+        }
+    }
+}
