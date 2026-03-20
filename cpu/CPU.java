@@ -27,17 +27,12 @@ public class CPU {
             String[] inst = Opcode.decode(this.mem.read(this.registers.getPtrs("PC")));
             this.registers.increment("PC");
             if (inst[0].equals("HLT")) break;
-            System.out.println(inst[0]);
 
             int i = 1;
-            while (i < inst.length && inst[i] != null) {
-                System.out.println(inst[i]);
-                i++;
-            }
+            while (i < inst.length && inst[i] != null) i++;
             while (i < inst.length) {
                 inst[i] = this.mem.read(this.registers.getPtrs("PC"));
                 this.registers.increment("PC");
-                System.out.println(inst[i]);
                 i++;
             }
             
