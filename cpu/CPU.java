@@ -23,7 +23,6 @@ public class CPU {
         sc.nextLine();
         this.registers.setPtrs("PC", address);
         while (true) {
-            StringWrap ins = new StringWrap();
             String[] inst = Opcode.decode(this.mem.read(this.registers.getPtrs("PC")));
             this.registers.increment("PC");
             if (inst[0].equals("HLT")) break;

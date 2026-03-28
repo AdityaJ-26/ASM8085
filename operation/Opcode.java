@@ -37,7 +37,7 @@ public class Opcode {
                 String[] list = s.split("\t");
                 int size = Integer.parseInt(list[list.length-1]);
                 if (list[1].equals(opcode)) {
-                    String[] part =  list[0].split("[,\\s]+");
+                    String[] part = list[0].split("[,\\s]+");
                     String inst[] = new String[size + part.length-1];
                     for (int i=0; i<part.length; i++) {
                         inst[i] = part[i];

@@ -5,7 +5,7 @@ public class StringConversion {
         StringBuffer binary = new StringBuffer();
         for (char c : data.toCharArray()) {
             if (c == 'h') continue;
-            int no = Integer.parseInt(String.valueOf(c), 16);
+            int no = Character.digit(c, 16);
             String bin = Integer.toBinaryString(no);
             while (bin.length() < 4) {
                 bin = "0" + bin;

@@ -13,7 +13,7 @@ public class Instruction {
         
         for (int i=1; i<inst.length; i++) {
 
-            if (inst[i].length() >= 4) {
+            if ( inst[i].length() >= 4 && (Utility.isData(inst[i]) || Utility.isAddress(inst[i])) ) {
                 return new String[] {
                     String.join(" ", Arrays.copyOfRange(inst, 0, i)),
                     inst[i].substring(0, 2),
@@ -21,7 +21,7 @@ public class Instruction {
                 };
             } 
          
-            else if (inst[i].length() == 3) {
+            else if ( inst[i].length() == 3 && Utility.isData(inst[i]) ) {
                 return new String[] {
                     String.join(" ", Arrays.copyOfRange(inst, 0, i)),
                     inst[i]
@@ -35,7 +35,7 @@ public class Instruction {
     public static void call(String[] inst) {
         switch( inst[0] ) {
             case "MOV":
-                Transfer.MOV(inst[1].charAt(0), inst[2].charAt(1));
+                Transfer.MOV(inst[1].charAt(0), inst[2].charAt(0));
                 break;
             case "ADD":
                 Arithmetic.ADD(inst[1].charAt(0));
