@@ -48,6 +48,13 @@ public class Instruction {
                 break;
             case "MVI":
                 Transfer.MVI(inst[1].charAt(0), inst[2]);
+                break;
+            case "ADI":
+                Arithmetic.ADI(inst[1]);
+                break;
+            case "SUB":
+                Arithmetic.SUB(inst[1].charAt(0));
+                break;
             case "HLT":
                 break;
             case "NOP":

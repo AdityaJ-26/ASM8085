@@ -10,6 +10,7 @@ public class Register {
     private String D, E;
     private String H, L;
     private int SP, PC;
+    private String W;
 
     public Register() {
         this.A = this.F = this.B = this.B = this.C = this.D = this.E = this.H = this.L = " ";
@@ -34,6 +35,8 @@ public class Register {
                 return this.L;
             case 'M':
                 return this.get("M");
+            case 'W':
+                return this.W;
         }
         return "00";
     }
@@ -79,7 +82,10 @@ public class Register {
                 break;
             case 'M':
                 set("M", data);
-                
+                break;
+            case 'W':
+                this.W = data;
+                break;
         }
     }
     public void set(String reg, String data) {

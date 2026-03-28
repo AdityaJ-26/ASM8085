@@ -45,4 +45,27 @@ public class StringConversion {
         }
         return hex.toString().toUpperCase() + "h";
     }
+
+    public static String twosCompliment(String op) {
+        int len = op.length()-1;
+        StringBuffer comp = new StringBuffer();
+        while (len >= 0 && op.charAt(len) == '0') {
+            comp.insert(0, '0');
+            len--;
+        }
+        if (len >= 0) {
+            comp.insert(0, '1');
+            len--;
+        }
+        while (len >= 0) {
+            if (op.charAt(len) == '0') {
+                comp.insert(0, '1');
+            }
+            else {
+                comp.insert(0, '0');
+            }
+            len--;
+        }
+        return new String(comp);
+    }
 }
