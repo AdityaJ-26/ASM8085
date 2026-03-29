@@ -1,7 +1,6 @@
 package memory;
 
-import operation.Opcode;
-import operation.Utility;
+import operation.*;
 import instruction.Instruction;
 import java.util.ArrayList;
 import java.util.Arrays;

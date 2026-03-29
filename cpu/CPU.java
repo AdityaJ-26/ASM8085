@@ -3,7 +3,7 @@ package cpu;
 import cpu.*;
 import operation.*;
 import memory.Memory;
-import instruction.*;
+import instruction.Instruction;
 
 import java.util.Scanner;
 

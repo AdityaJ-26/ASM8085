@@ -43,6 +43,7 @@ public class StringConversion {
             int decimal = Integer.parseInt(chunk, 2);
             hex.append(Integer.toHexString(decimal));
         }
+        if (hex.length() == 1) return "0" + hex.toString().toUpperCase() + "h";
         return hex.toString().toUpperCase() + "h";
     }
 

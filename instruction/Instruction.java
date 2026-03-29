@@ -55,6 +55,20 @@ public class Instruction {
             case "SUB":
                 Arithmetic.SUB(inst[1].charAt(0));
                 break;
+            case "CMA":
+                Logic.CMA();
+                break;
+            case "INR":
+                Arithmetic.INR(inst[1].charAt(0));
+                break;
+            // case "DCR":
+            //     Arithmetic.DCR(inst[1].charAt(0));
+            //     break;
+            case "ANA":
+                Logic.ANA(inst[1].charAt(0));
+                break;
+            case "ORA":
+                break;
             case "HLT":
                 break;
             case "NOP":
