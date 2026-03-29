@@ -34,8 +34,8 @@ class Logic {
     }
 
     static void ANA(char reg) {
-        String op1 = CPU.registers.get('A');
-        String op2 = CPU.registers.get(reg);
+        String op1 = StringConversion.hexaToBinary( CPU.registers.get('A') );
+        String op2 = StringConversion.hexaToBinary( CPU.registers.get(reg) );
 
         StringBuffer resBin = new StringBuffer();
 
@@ -45,7 +45,9 @@ class Logic {
 
         CPU.flags.setAC(true);
         CPU.flags.setC(false);
+
         String res = StringConversion.binaryToHexa(resBin);
+        CPU.registers.set('A', res);
         CPU.flags.update(res);
     }
 }
