@@ -5,6 +5,10 @@ import operation.Utility;
 import operation.StringConversion;
 
 class Arithmetic {
+
+    /*-------------------------------------------------*/
+    // addition implementation
+    /*-------------------------------------------------*/
     static void ADD(char reg) {
         String op1 = StringConversion.hexaToBinary(CPU.registers.get('A'));
         String op2 = StringConversion.hexaToBinary(CPU.registers.get(reg));
@@ -34,6 +38,7 @@ class Arithmetic {
         CPU.registers.set('A', res);
     }
 
+    // add with carry
     static void ADD(char reg, int carry) {
         String op1 = StringConversion.hexaToBinary(CPU.registers.get('A'));
         String op2 = StringConversion.hexaToBinary(CPU.registers.get(reg));
@@ -62,11 +67,16 @@ class Arithmetic {
         CPU.registers.set('A', res);
     }
 
+    // add with value
     static void ADI(String data) {
         CPU.registers.set('W', data);
         Arithmetic.ADD('W');
     }
 
+
+    /*-------------------------------------------------*/
+    // substraction implementation
+    /*-------------------------------------------------*/
     static void SUB(char reg) {
         String op1 = StringConversion.hexaToBinary(CPU.registers.get('A'));
         String op2 = StringConversion.hexaToBinary(CPU.registers.get(reg));
@@ -83,7 +93,7 @@ class Arithmetic {
         int i = op1.length()-1;
         for (; i >= 0; i--) {
             if (i == 3) {
-                CPU.flags.setAC(carry == 1);
+                CPU.flags.setAC(carry != 1);
             }
             int s = (op1.charAt(i) - '0') + (op2.charAt(i) - '0') + carry;
             carry = s/2;
@@ -98,6 +108,10 @@ class Arithmetic {
         CPU.registers.set('A', res);
     }
 
+
+    /*-------------------------------------------------*/
+    // increment / decrement implementation
+    /*-------------------------------------------------*/
     static void INR(char reg) {
         String op = StringConversion.hexaToBinary(CPU.registers.get(reg));
 
@@ -121,19 +135,3 @@ class Arithmetic {
         CPU.registers.set(reg, res);
     }
 }
-
-// MVI A 05h
-// MVI B 06h
-// ADD B
-// STA 2050
-// MOV B,A
-// INR B
-// MOV A,B
-// STA 2051
-// ADI 16h
-// STA 2052
-// SUB B
-// STA 2053
-// CMA
-// STA 2054
-// HLT

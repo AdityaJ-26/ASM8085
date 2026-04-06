@@ -17,6 +17,11 @@ public class Register {
         this.SP = this.PC = 0000;
     }
 
+    /*-------------------------------------------------*/
+    // getters / setters
+    /*-------------------------------------------------*/
+    
+    // single registers
     public String get(char reg) {
         switch (reg) {
             case 'A':
@@ -37,21 +42,6 @@ public class Register {
                 return this.get("M");
             case 'W':
                 return this.W;
-        }
-        return "00";
-    }
-    public String get(String reg) {
-        int address;
-        switch (reg) {
-            case "M":
-                address = StringConversion.hexaToDecimal(this.H + this.L); 
-                return CPU.mem.read(address);
-            case "HL": case "H": 
-                return (this.H + this.L);
-            case "BC": case "B":
-                return (this.B + this.C);
-            case "DE": case "D":
-                return (this.D + this.E);
         }
         return "00";
     }
@@ -88,6 +78,24 @@ public class Register {
                 break;
         }
     }
+
+    // register pairs
+    public String get(String reg) {
+        int address;
+        switch (reg) {
+            case "M":
+                address = StringConversion.hexaToDecimal(this.H + this.L); 
+                return CPU.mem.read(address);
+            case "HL": case "H": 
+                return (this.H + this.L);
+            case "BC": case "B":
+                return (this.B + this.C);
+            case "DE": case "D":
+                return (this.D + this.E);
+        }
+        return "00";
+    }
+
     public void set(String reg, String data) {
         int address;
         switch (reg) {
@@ -109,6 +117,8 @@ public class Register {
                 break;
         }
     }
+
+    // memory registers
     public void setPtrs(String reg, int data) {
         switch (reg) {
             case "PC":
@@ -119,6 +129,7 @@ public class Register {
                 break;
         }
     }
+
     public int getPtrs(String reg) {
         switch (reg) {
             case "PC":
@@ -128,6 +139,7 @@ public class Register {
         }
         return 0;
     }
+
     public void increment(String reg) {
         switch (reg) {
             case "PC":

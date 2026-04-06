@@ -13,6 +13,10 @@ public class Flag {
         this.sign = this.zero = this.auxillaryCarry = this.parity = this.carry = false;
     }
 
+
+    /*-------------------------------------------------*/
+    // getters / setters
+    /*-------------------------------------------------*/
     public boolean getZ() { return this.zero; };
     public void setZ(boolean zero) { this.zero = zero; }
 

@@ -6,6 +6,10 @@ import instruction.*;
 import java.util.Arrays;
 
 public class Instruction {
+
+    /*-------------------------------------------------*/
+    // process instruction to split instruction and data
+    /*-------------------------------------------------*/
     public static String[] process(String d) {
         if (d.length() == 0) return new String[]{"NOP"};
         
@@ -32,6 +36,10 @@ public class Instruction {
         return new String[] {d};
     }
 
+
+    /*-------------------------------------------------*/
+    // instruction call
+    /*-------------------------------------------------*/
     public static void call(String[] inst) {
         switch( inst[0] ) {
             case "MOV":
@@ -39,6 +47,9 @@ public class Instruction {
                 break;
             case "ADD":
                 Arithmetic.ADD(inst[1].charAt(0));
+                break;
+            case "ADC":
+                Arithmetic.ADD(inst[1].charAt(0), (CPU.flags.getC() ? 1 : 0));
                 break;
             case "LDA":
                 Transfer.LDA(inst[2]+inst[1]);
@@ -68,6 +79,12 @@ public class Instruction {
                 Logic.ANA(inst[1].charAt(0));
                 break;
             case "ORA":
+                Logic.ORA(inst[1].charAt(0));
+                break;
+            case "LXI":
+                Transfer.LXI(inst[1], inst[3]+inst[2]);
+            case "JMP":
+                Control.JMP(inst[1]);
                 break;
             case "HLT":
                 break;

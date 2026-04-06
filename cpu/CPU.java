@@ -8,16 +8,45 @@ import instruction.Instruction;
 import java.util.Scanner;
 
 public class CPU {
+    /*-------------------------------------------------*/
+    // CPU members
+    /*-------------------------------------------------*/
     static public Register registers;
     static public Flag flags;
     static public Memory mem;
 
+
+    /*-------------------------------------------------*/
+    // constructor
+    /*-------------------------------------------------*/
     CPU() {
         registers = new Register();
         flags = new Flag();
         mem = new Memory();
     }
 
+
+    /*-------------------------------------------------*/
+    // input method
+    /*-------------------------------------------------*/
+    private void input(Scanner sc) {
+        int startAddress = sc.nextInt();
+        sc.nextLine();
+        
+        this.mem.setCurrAddress(startAddress);
+        
+        while (true) {
+            String input = sc.nextLine();
+            this.mem.write(input);
+            if (input.equals("HLT")) 
+                { break; }
+        }
+    }
+
+
+    /*-------------------------------------------------*/
+    // excecute method
+    /*-------------------------------------------------*/
     private void execute(Scanner sc) {
         int address = sc.nextInt();
         sc.nextLine();
@@ -39,20 +68,10 @@ public class CPU {
         }
     }
 
-    private void input(Scanner sc) {
-        int startAddress = sc.nextInt();
-        sc.nextLine();
-        
-        this.mem.setCurrAddress(startAddress);
-        
-        while (true) {
-            String input = sc.nextLine();
-            this.mem.write(input);
-            if (input.equals("HLT")) 
-                { break; }
-        }
-    }
 
+    /*-------------------------------------------------*/
+    // memory access
+    /*-------------------------------------------------*/
     private void memoryAccess(Scanner sc) {
         int address = sc.nextInt();
         sc.nextLine();
@@ -89,6 +108,10 @@ public class CPU {
                 case 3:
                     cpu.execute(sc);
                     break;
+                case 4:
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+                    break;
                 case 0:
                     System.out.println("Exiting...");
                     run = false;
@@ -98,3 +121,19 @@ public class CPU {
         sc.close();
     }
 }
+
+// MVI A 05h
+// MVI B 06h
+// ADD B
+// STA 2050
+// MOV B,A
+// INR B
+// MOV A,B
+// STA 2051
+// ADI 16h
+// STA 2052
+// SUB B
+// STA 2053
+// CMA
+// STA 2054
+// HLT

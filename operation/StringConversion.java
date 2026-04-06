@@ -1,6 +1,10 @@
 package operation;
 
 public class StringConversion {
+
+    /*-------------------------------------------------*/
+    // base conversions
+    /*-------------------------------------------------*/
     public static String hexaToBinary(String data) {
         StringBuffer binary = new StringBuffer();
         for (char c : data.toCharArray()) {
@@ -47,6 +51,10 @@ public class StringConversion {
         return hex.toString().toUpperCase() + "h";
     }
 
+
+    /*-------------------------------------------------*/
+    // two compliment
+    /*-------------------------------------------------*/
     public static String twosCompliment(String op) {
         int len = op.length()-1;
         StringBuffer comp = new StringBuffer();

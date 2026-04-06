@@ -2,6 +2,9 @@ package operation;
 
 public class Utility {
 
+    /*-------------------------------------------------*/
+    // checks and error reporting
+    /*-------------------------------------------------*/
     public static void error(String err) {
         System.out.println(err);
         System.exit(-1);
@@ -17,7 +20,6 @@ public class Utility {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -31,7 +33,6 @@ public class Utility {
                 return false;
             }
         }
-        
         return true;
     }
 

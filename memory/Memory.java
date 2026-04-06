@@ -9,15 +9,24 @@ public class Memory {
     private String mem[];
     int currAddress;
     
+    /*-------------------------------------------------*/
+    // constructor
+    /*-------------------------------------------------*/
     public Memory() {
         mem = new String[65536];
         Arrays.fill(mem, "00h");
     }
 
+    /*-------------------------------------------------*/
+    // public function for input
+    /*-------------------------------------------------*/
     public void setCurrAddress(int address) {
         this.currAddress = address;
     }
 
+    /*-------------------------------------------------*/
+    // read and write operations
+    /*-------------------------------------------------*/
     public void write(String inst) {
         String[] d = Instruction.process(inst);
         mem[currAddress++] = Opcode.fetch(d[0]);
@@ -27,9 +36,6 @@ public class Memory {
     }
 
     public void write(int address, String data) {
-        // if (Utility.checkFormat8Bit(data) == false) {
-        //     Utility.error("_wrong_format_input");
-        // }
         mem[address] = data;
     }
 

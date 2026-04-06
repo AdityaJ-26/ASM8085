@@ -7,6 +7,10 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Opcode {
+
+    /*-------------------------------------------------*/
+    // converts instruction to opcode, returns as string
+    /*-------------------------------------------------*/
     public static String fetch(String inst) {
         try {
             File f = new File("data\\opcodes.txt");
@@ -27,6 +31,9 @@ public class Opcode {
         return "00";
     }
 
+    /*-------------------------------------------------*/
+    // converts opcode to instruction with tracing empty blocks
+    /*-------------------------------------------------*/
     public static String[] decode(String opcode) {
         try {
             File f = new File("data\\opcodes.txt");
@@ -35,7 +42,9 @@ public class Opcode {
             while (sc.hasNextLine()) {
                 String s = sc.nextLine();
                 String[] list = s.split("\t");
+
                 int size = Integer.parseInt(list[list.length-1]);
+
                 if (list[1].equals(opcode)) {
                     String[] part = list[0].split("[,\\s]+");
                     String inst[] = new String[size + part.length-1];
@@ -44,6 +53,7 @@ public class Opcode {
                     }
                     return inst;
                 }
+
             }
         }
         catch (IOException e) {
