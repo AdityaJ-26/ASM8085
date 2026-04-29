@@ -22,7 +22,14 @@ public class StringConversion {
     public static int hexaToDecimal(String data) {
         int number = 0, base = 1;
         int len = data.length();
-        for (int i=len-2; i>=0; i--) {
+        int i;
+        if (data.length() == 4) {
+            i = len-1;
+        }
+        else {
+            i = len-2;
+        }
+        for (; i>=0; i--) {
             char c = data.charAt(i);
             if (c >= '0' && c <= '9') {
                 number += (c - '0') * base;
@@ -34,6 +41,26 @@ public class StringConversion {
             }
         }
         return number;
+    }
+
+    public static String decimalToHexa(int number) {
+        String hex = "";
+        char[] hexChars = {'0','1','2','3','4','5','6','7',
+                           '8','9','A','B','C','D','E','F'};
+    
+        if (number == 0) return "0000";
+    
+        while (number > 0) {
+            int remainder = number % 16;
+            hex = hexChars[remainder] + hex;
+            number = number / 16;
+        }
+    
+        while (hex.length() < 4) {
+            hex = "0" + hex;
+        }
+    
+        return hex;
     }
 
     public static String binaryToHexa(StringBuffer binary) {

@@ -14,7 +14,6 @@ public class Instruction {
         if (d.length() == 0) return new String[]{"NOP"};
         
         String[] inst = d.split("[\\s]+");
-        
         for (int i=1; i<inst.length; i++) {
 
             if ( inst[i].length() >= 4 && (Utility.isData(inst[i]) || Utility.isAddress(inst[i])) ) {
@@ -32,7 +31,6 @@ public class Instruction {
                 };
             }
         }
-
         return new String[] {d};
     }
 
@@ -83,8 +81,21 @@ public class Instruction {
                 break;
             case "LXI":
                 Transfer.LXI(inst[1], inst[3]+inst[2]);
+                break;
             case "JMP":
-                Control.JMP(inst[1]);
+                Control.JMP(inst[2] + inst[1]);
+                break;
+            case "CALL":
+                Control.CALL(inst[2] + inst[1]);
+                break;
+            case "RET":
+                Control.RET();
+                break;
+            case "PUSH":
+                Control.PUSH(inst[1]);
+                break;
+            case "POP":
+                Control.POP(inst[1]);
                 break;
             case "HLT":
                 break;
@@ -93,3 +104,14 @@ public class Instruction {
         }
     }
 }
+
+
+/*
+MVI A 05h
+
+MVI A | 05h
+
+inst[]  MVI | A | 05h
+
+
+*/

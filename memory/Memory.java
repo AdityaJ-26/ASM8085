@@ -23,16 +23,20 @@ public class Memory {
     public void setCurrAddress(int address) {
         this.currAddress = address;
     }
+    public int getCurrAddress() {
+        return this.currAddress;
+    }
 
     /*-------------------------------------------------*/
     // read and write operations
     /*-------------------------------------------------*/
-    public void write(String inst) {
+    public int writeInst(String inst) {
         String[] d = Instruction.process(inst);
         mem[currAddress++] = Opcode.fetch(d[0]);
         for (int i=d.length-1; i>=1; i--) {
             mem[currAddress++] = d[i];
         }
+        return currAddress;
     }
 
     public void write(int address, String data) {

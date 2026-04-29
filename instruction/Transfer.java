@@ -33,6 +33,12 @@ class Transfer {
     }
 
     static void LXI(String reg, String data) {
-        CPU.registers.set(reg, data);
+        if (reg.equals("PC") || reg.equals("SP")) {
+            data = data.substring(0, data.length() - 1);
+            CPU.registers.setPtrs(reg, Integer.parseInt(data));
+        }
+        else {
+            CPU.registers.set(reg, data);
+        }  
     }
 }

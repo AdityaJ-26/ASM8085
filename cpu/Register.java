@@ -13,7 +13,7 @@ public class Register {
     private String W;
 
     public Register() {
-        this.A = this.F = this.B = this.B = this.C = this.D = this.E = this.H = this.L = " ";
+        this.A = this.F = this.B = this.B = this.C = this.D = this.E = this.H = this.L = "00h";
         this.SP = this.PC = 0000;
     }
 
@@ -87,11 +87,11 @@ public class Register {
                 address = StringConversion.hexaToDecimal(this.H + this.L); 
                 return CPU.mem.read(address);
             case "HL": case "H": 
-                return (this.H + this.L);
+                return (this.H.replace("h", "") + this.L);
             case "BC": case "B":
-                return (this.B + this.C);
+                return (this.B.replace("h", "") + this.C);
             case "DE": case "D":
-                return (this.D + this.E);
+                return (this.D.replace("h", "") + this.E);
         }
         return "00";
     }
@@ -104,15 +104,15 @@ public class Register {
                 CPU.mem.write(address, data);
                 break; 
             case "HL": case "H":
-                this.H = data.substring(0, 2);
+                this.H = data.substring(0, 2) + "h";
                 this.L = data.substring(2);
                 break;
             case "BC": case "B":
-                this.B = data.substring(0, 2);
+                this.B = data.substring(0, 2) + "h";
                 this.C = data.substring(2);
                 break;
             case "DE": case "D":
-                this.D = data.substring(0, 2);
+                this.D = data.substring(0, 2) + "h";
                 this.E = data.substring(2);
                 break;
         }
@@ -147,6 +147,17 @@ public class Register {
                 break;
             case "SP":
                 this.SP++;
+                break;
+        }
+    }
+
+    public void decrement(String reg) {
+        switch (reg) {
+            case "PC":
+                this.PC--;
+                break;
+            case "SP":
+                this.SP--;
                 break;
         }
     }
