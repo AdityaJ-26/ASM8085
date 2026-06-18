@@ -23,8 +23,6 @@ public class GUI extends JFrame {
         setSize(800, 600);
         setLocationRelativeTo(null);
         setResizable(false);
-        // ImageIcon logo = new ImageIcon(getClass().getResource("assets/logo.png"));
-        // setIconImage(logo.getImage());
 
         Color BGColor = new Color(18, 18, 24);
         Color PANEL = new Color(28, 28, 36);
@@ -86,7 +84,8 @@ public class GUI extends JFrame {
 
             while (true) {
                 String line = JOptionPane.showInputDialog(this, "Address: " + StringConversion.decimalToHexa(address));
-                if (line == null || line.equals("Q")) break;
+                if (line == null) continue;
+                if (line.equals("Q")) break;
                 address = cpu.input(line);
             }
             refreshStatus();
@@ -99,7 +98,7 @@ public class GUI extends JFrame {
             while (true) {
                 String val = JOptionPane.showInputDialog(this, StringConversion.decimalToHexa(address) + " : " + cpu.memRead(address));
                 if (val.equals("Q")) break;
-                if (val.length() == 3) cpu.memWrite(address, val);
+                if (val.length() >= 2) cpu.memWrite(address, val);
                 address++;
             }
             refreshStatus();

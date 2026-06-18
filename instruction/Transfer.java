@@ -1,6 +1,7 @@
 package instruction;
 
 import cpu.CPU;
+import operation.StringConversion;
 
 class Transfer {
 
@@ -22,13 +23,13 @@ class Transfer {
     }
 
     static void LDA(String data) {
-        int address = Integer.parseInt(data);
+        int address = StringConversion.hexaToDecimal(data);
         CPU.registers.set('A', CPU.mem.read(address));
         CPU.flags.update(CPU.registers.get('A'));
     }
 
     static void STA(String data) {
-        int address = Integer.parseInt(data);
+        int address = StringConversion.hexaToDecimal(data);
         CPU.mem.write(address, CPU.registers.get('A'));
     }
 

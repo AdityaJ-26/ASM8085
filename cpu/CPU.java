@@ -45,6 +45,9 @@ public class CPU {
         }
     }
 
+    /*-------------------------------------------------*/
+    // status string returning methods
+    /*-------------------------------------------------*/
     public String flagStatus() {
         return new String(
             "Sign      : " + this.flags.getS() + "\n" +
